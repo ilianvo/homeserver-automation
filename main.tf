@@ -49,6 +49,13 @@ depends_on = [null_resource.zrok]
     command = "sudo docker run -i -t -d -p 85:80 onlyoffice/documentserver"
   }
 }
+resource "null_resource" "disk_resize" {
+depends_on = [null_resource.zrok]
+
+  provisioner "local-exec" {
+    command = "${file("disk_resize.sh")}"
+  }
+}
 
 
 ##provisioner "local-exec" {
