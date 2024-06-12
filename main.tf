@@ -56,6 +56,13 @@ depends_on = [null_resource.zrok]
     command = "${file("disk_resize.sh")}"
   }
 }
+resource "null_resource" "tmux" {
+depends_on = [null_resource.disk_resize]
+
+  provisioner "local-exec" {
+    command = "sudo apt install tmux"
+  }
+}
 
 
 ##provisioner "local-exec" {
