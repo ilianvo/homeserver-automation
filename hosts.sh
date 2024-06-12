@@ -15,3 +15,8 @@ ff02::2 ip6-allrouters
 EOF
 
 sudo chmod u+w /etc/hosts
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+sudo rm -v /etc/resolv.conf
+sudo systemctl start dnsmasq
+sudo systemctl enable dnsmasq
