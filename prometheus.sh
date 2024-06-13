@@ -8,10 +8,9 @@ sudo cat << EOF > /home/prometheus/docker-compose.yml
 version: "3"
 services:
   prometheus:
+    network_mode: host
     image: prom/prometheus:latest
     container_name: prometheus
-    ports:
-      - 9090:9090
     volumes:
       - ./prometheus:/etc/prometheus
       - ./prometheus-data:/prometheus
