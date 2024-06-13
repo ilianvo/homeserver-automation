@@ -64,6 +64,20 @@ depends_on = [null_resource.disk_resize]
   }
 }
 
+resource "null_resource" "prometheus" {
+depends_on = [null_resource.tmux]
+
+  provisioner "local-exec" {
+    command = "${file("prometheus.sh")}"
+  }
+}
+resource "null_resource" "node_exporter" {
+depends_on = [null_resource.prometheus]
+
+  provisioner "local-exec" {
+    command = "${file("node_exporter.sh")}"
+  }
+}
 
 ##provisioner "local-exec" {
     ##when = destroy  # This attribute specifies the provisioner runs only on destroy
