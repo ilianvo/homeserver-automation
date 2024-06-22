@@ -1,6 +1,6 @@
 
 provider "local" {
-  # No configuration options required for basic usage
+  
 }
 
 resource "null_resource" "dnsmasq" {
@@ -79,11 +79,19 @@ depends_on = [null_resource.prometheus]
   }
 }
 
-##provisioner "local-exec" {
-    ##when = destroy  # This attribute specifies the provisioner runs only on destroy
-    ##command = "sudo apt-get remove dnsmasq -y"
-  ##}
-##}
+resource "null_resource" "grafana" {
+depends_on = [null_resource.node_exporter]
 
+  provisioner "local-exec" {
+    command = "${file("grafana.sh")}"
+  }
+}
 
+resource "null_resource" "nextcloud" {
+depends_on = [null_resource.grafana]
+
+  provisioner "local-exec" {
+    command = "${file("nextcloud.sh")}"
+  }
+}
 
