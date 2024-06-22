@@ -23,5 +23,5 @@ terraform init
 terraform plan
 terraform apply -auto-approve
 ```
-#Schema
+# Schema
 ![Blank diagram](https://github.com/ilianvo/homeserver-automation/assets/119301418/112d9f73-445f-4ae4-8ff1-a0cb175d026a)
