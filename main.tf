@@ -46,7 +46,7 @@ resource "null_resource" "onlyoffice" {
 depends_on = [null_resource.disk_resize]
 
   provisioner "local-exec" {
-    command = "sudo docker run -i -t -d -p 85:80 onlyoffice/documentserver"
+    command = "sudo docker run -d -p 85:80 --restart=unless-stopped onlyoffice/documentserver"
   }
 }
 resource "null_resource" "disk_resize" {
